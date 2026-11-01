@@ -5,7 +5,7 @@ factories:
   # row shows it): apmx-demo-factory v2.0.0 as run.yml resolves it
   # (repository, commit and content). No hermetic fixture is allowed here.
   allow:
-    - "danielmeppiel/apmx-demo-factory#v2.0.0@sha256:a718ae612dad83885e955214ba2bfa84797cb7abf3f8f90a4919b006c1a463b5"
+    - "danielmeppiel/apmx-demo-factory#v2.0.0@sha256:f6c2d2401f3d343e5cc0eb0227bc72f5a30db242c4049ee6bbcc813f9a24eb2d"
   require_signed: true
   signers:
     # Every changed file must be covered by a signed verification summary from

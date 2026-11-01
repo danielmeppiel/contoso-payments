@@ -1,0 +1,21 @@
+# APM policy for this repository. APM keeps its own keys; apmx reads only
+# `factories`, from the pull request's BASE commit, so a PR cannot loosen it.
+factories:
+  # Definition digest of the one factory Contoso reviewed (the audit's Factory
+  # row shows it): apmx-demo-factory v2.0.0 as run.yml resolves it
+  # (repository, commit and content). No hermetic fixture is allowed here.
+  # TODO: allow "danielmeppiel/apmx-demo-factory#v2.0.0@sha256:<digest>" once rehearsed.
+  allow: []
+  require_signed: true
+  signers:
+    # Every changed file must be covered by a signed verification summary from
+    # apmx's reusable run.yml running in this repository (where the attestations
+    # are stored), pinned to the run.yml release factory.yml calls: the tag and
+    # the commit it must resolve to (`git rev-parse <tag>^{commit}`), because a
+    # tag can move and this SHA cannot.
+    # TODO(v0.8.0): repin to run.yml@refs/tags/v0.8.0 and its commit SHA.
+    - workflow: danielmeppiel/apmx/.github/workflows/run.yml@refs/tags/v0.7.1
+      workflow_sha: "a70c1939dddc6f5d7888b76fd5bb8bab3e69e886"
+      repo: danielmeppiel/contoso-payments
+  revoked: []
+  enforcement: block

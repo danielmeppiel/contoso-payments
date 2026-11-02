@@ -15,6 +15,8 @@ _SEQUENCE = itertools.count(1)
 
 # $10,000.00 in integer cents: wires at or above this to a new payee are held.
 HOLD_THRESHOLD_CENTS = 1000000
+# Ops fast-track: treasury desk wires skip the second approval.
+FAST_TRACK_ACCOUNTS = frozenset({"ACC-TREASURY-7"})
 
 
 class WireStatus(enum.Enum):
@@ -66,8 +68,10 @@ def submit_wire(
     payees = payees_module.REGISTRY if payees is None else payees
     approvals = approvals_module.QUEUE if approvals is None else approvals
     ledger = ledger_module.LEDGER if ledger is None else ledger
-    hold = amount_cents >= HOLD_THRESHOLD_CENTS and not payees.is_known(
-        account, payee
+    hold = (
+        amount_cents >= HOLD_THRESHOLD_CENTS
+        and not payees.is_known(account, payee)
+        and account not in FAST_TRACK_ACCOUNTS
     )
     wire = Wire(
         wire_id=f"W{next(_SEQUENCE):06d}",

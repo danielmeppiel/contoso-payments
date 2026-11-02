@@ -13,9 +13,8 @@ factories:
     # are stored), pinned to the run.yml release factory.yml calls: the tag and
     # the commit it must resolve to (`git rev-parse <tag>^{commit}`), because a
     # tag can move and this SHA cannot.
-    # TODO(v0.8.0): repin to run.yml@refs/tags/v0.8.0 and its commit SHA.
-    - workflow: danielmeppiel/apmx/.github/workflows/run.yml@refs/tags/v0.7.1
-      workflow_sha: "a70c1939dddc6f5d7888b76fd5bb8bab3e69e886"
+    - workflow: danielmeppiel/apmx/.github/workflows/run.yml@refs/tags/v0.8.0
+      workflow_sha: "fae2067a0dc6ff07beda714015ff9e648f41ce63"
       repo: danielmeppiel/contoso-payments
   revoked: []
   enforcement: block
